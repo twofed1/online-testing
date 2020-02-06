@@ -3,14 +3,18 @@
 ## Installation
 
 ```
-git clone
+git clone https://github.com/twofed1/online-testing.git
 composer install
-change DATABASE_URL in .env
-bin/console doctrine:database:create
-bin/console doctrine:migrations:diff
-bin/console doctrine:migrations:migrate
-bin/console doctrine:fixtures:load
+```
+
+Now you need to change DATABASE_URL in .env
+
+```
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
 symfony server:start
 ```
 
-Now you can open [http://localhost:8000/login] in your browser.
+Now you can open [app home page](http://localhost:8000/login) in your browser.
