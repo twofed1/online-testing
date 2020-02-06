@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Results page{% endblock %}
+
+{% block body %}
+
+    <h1>Test results</h1>
+    <div class="row">
+        {% for result in results %}
+            <div class="col-sm-4">
+                <h2>{{ result.testId.name }}</h2>
+                {% if result.userId == null %}
+                    <h3>Anonymous</h3>
+                {% else %}
+                    <h3>{{ result.userId.username }}</h3>
+                {% endif %}
+                {% for answer in answers[result.getId] %}
+                    <p>Question: {{ answer.questionId.text }}</p>
+
+                    {% if answer.answer == 1 %}
+                        <p class="badge-success">Your result: 100%</p>
+                    {% elseif answer.answer == 0 %}
+                        <p class="badge-danger">Your result: 0%</p>
+                    {% else %}
+                        <p class="badge-info">Your result: {{ (answer.answer *100)|round}} %</p>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ test.name }}{% endblock %}
+
+{% block body %}
+
+<h1>{{ test.name }}</h1>
+<form method="post" enctype="multipart/form-data">
+
+    {% set i = 1 %}
+    {% for question in questions %}
+        <div class="question">
+            <h2>{{ question.text }}</h2>
+            {% if question.imageFileName %}
+                <img class="question_image" src="{{ asset('uploads/images/' ~ question.imageFileName) }}"><br>
+            {% endif %}
+            {% if question.type == 1 %}
+                {% set j = 0 %}
+                {% for ans in answers[question.id] %}
+                    <input type="checkbox" name="answer[{{ question.id }}][{{ j }}]" value="{{ ans.text }}">{{ ans.text }}<br>
+                    {% set j = j + 1 %}
+                {% endfor %}
+            {% elseif question.type == 2 %}
+                {% for ans in answers[question.id] %}
+                    <input type="radio" name="answer[{{ question.id }}]" value="{{ ans.text }}">{{ ans.text }}<br>
+                {% endfor %}
+            {% elseif question.type == 3 %}
+                <input type="text" name="answer[{{ question.id }}]"><br><br>
+            {% endif %}
+
+            {% set i = i + 1 %}
+        </div>
+    {% endfor %}
+
+    <button class="btn btn-success" type="submit">Submit</button>
+</form>
+
+{% endblock %}

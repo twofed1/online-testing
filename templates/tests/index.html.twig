@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tests page{% endblock %}
+
+{% block body %}
+
+<h1>Tests</h1>
+<div class="row">
+    {% for test in tests %}
+		<div class="col-sm-4">
+			<h2>{{ test.name }}</h2>
+			<p>{{ test.description }}</p>
+			<a class="btn btn-success" href="{{ path('test_item', { id: test.id }) }}">Get started</a>
+			{% if is_granted('ROLE_ADMIN') %}
+				<a class="btn badge-danger" href="{{ path('test_remove', { id: test.id }) }}">Remove test</a>
+			{% endif %}
+		</div>
+    {% endfor %}
+</div>
+
+{% endblock %}

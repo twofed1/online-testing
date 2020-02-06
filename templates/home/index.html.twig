@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home page{% endblock %}
+
+{% block body %}
+
+    <h1>Hello!</h1>
+
+    <h2>We got {{ tests }} tests</h2>
+    <h3>and {{ questions }} questions!</h3>
+
+    <a class="btn btn-success" href="{{ path('tests') }}">View tests</a>
+
+{% endblock %}

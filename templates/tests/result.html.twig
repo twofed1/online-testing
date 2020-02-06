@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ test.name }}{% endblock %}
+
+{% block body %}
+
+<h1>{{ test.name }} results</h1>
+
+{% for question in questions %}
+    <div class="question">
+        <h2>{{ question.text }}</h2>
+        {% if question.imageFileName %}
+            <img class="question_image" src="{{ asset('uploads/images/' ~ question.imageFileName) }}"><br>
+        {% endif %}
+        {% if results[question.id] == 1 %}
+            <p class="badge-success">Your result: 100%</p>
+            <p>{{ answers[question.id] | raw }}</p>
+        {% elseif results[question.id] == 0 %}
+            <p class="badge-danger">Your result: 0%</p>
+            {% if answers[question.id] is defined %}
+                <p>{{ answers[question.id] | raw }}</p>
+            {% else %}
+                <p>no answer</p>
+            {% endif %}
+        {% else %}
+            <p class="badge-info">Your result: {{ (results[question.id] *100)|round}} %</p>
+            <p>{{ answers[question.id] | raw }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+<a class="btn btn-success" href="{{ path('tests') }}">Back to tests list</a>
+
+{% endblock %}
